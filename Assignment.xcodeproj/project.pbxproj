@@ -13,6 +13,7 @@
 		52FA119022DF197000022913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52FA118F22DF197000022913 /* Assets.xcassets */; };
 		52FA119322DF197000022913 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52FA119122DF197000022913 /* LaunchScreen.storyboard */; };
 		52FA119E22DF197000022913 /* AssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA119D22DF197000022913 /* AssignmentTests.swift */; };
+		52FA11AE22DF25F400022913 /* dataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA11AD22DF25F400022913 /* dataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		52FA119922DF197000022913 /* AssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssignmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52FA119D22DF197000022913 /* AssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTests.swift; sourceTree = "<group>"; };
 		52FA119F22DF197000022913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52FA11AD22DF25F400022913 /* dataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,8 @@
 		52FA117C22DF197000022913 = {
 			isa = PBXGroup;
 			children = (
+				52FA119122DF197000022913 /* LaunchScreen.storyboard */,
+				52FA118C22DF197000022913 /* Main.storyboard */,
 				52FA118722DF197000022913 /* Assignment */,
 				52FA119C22DF197000022913 /* AssignmentTests */,
 				52FA118622DF197000022913 /* Products */,
@@ -78,10 +82,9 @@
 			isa = PBXGroup;
 			children = (
 				52FA118822DF197000022913 /* AppDelegate.swift */,
-				52FA118A22DF197000022913 /* ViewController.swift */,
-				52FA118C22DF197000022913 /* Main.storyboard */,
+				52FA11A822DF259C00022913 /* view */,
+				52FA11A922DF25AB00022913 /* Model */,
 				52FA118F22DF197000022913 /* Assets.xcassets */,
-				52FA119122DF197000022913 /* LaunchScreen.storyboard */,
 				52FA119422DF197000022913 /* Info.plist */,
 			);
 			path = Assignment;
@@ -94,6 +97,22 @@
 				52FA119F22DF197000022913 /* Info.plist */,
 			);
 			path = AssignmentTests;
+			sourceTree = "<group>";
+		};
+		52FA11A822DF259C00022913 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				52FA118A22DF197000022913 /* ViewController.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		52FA11A922DF25AB00022913 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52FA11AD22DF25F400022913 /* dataModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +218,7 @@
 			files = (
 				52FA118B22DF197000022913 /* ViewController.swift in Sources */,
 				52FA118922DF197000022913 /* AppDelegate.swift in Sources */,
+				52FA11AE22DF25F400022913 /* dataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

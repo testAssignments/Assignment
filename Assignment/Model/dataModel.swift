@@ -7,3 +7,13 @@
 //
 
 import Foundation
+struct data: Codable {
+    var title: String?
+    var description: String?
+    var imageHref: String?
+}
+
+struct TableData: Codable {
+    var title: String?
+    var rows: [data]?
+}
