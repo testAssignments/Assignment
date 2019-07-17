@@ -9,11 +9,18 @@
 import UIKit
 
 class ViewController: UIViewController {
+    /// Dynamic label height
+    var labelheight:CGFloat = 0.0
+    /// Table of Content
     lazy var tableView :UITableView = {
         let tableView = UITableView(frame: UIScreen.main.bounds)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor.lightGray
+        tableView.estimatedRowHeight = 90
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(dataCell.self, forCellReuseIdentifier: dataCell.dataCelIdentifier)
         return tableView
         }()
     
@@ -38,15 +45,16 @@ class ViewController: UIViewController {
     /// Setting up constraints here
     func setlayouts(){
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-
+    /// View refresh method
     @objc func refreshView() {
         print("refresh tableview..")
+        tableView.reloadData()
     }
 }
 extension ViewController:UITableViewDelegate,UITableViewDataSource{
@@ -55,10 +63,23 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        return cell
+        guard let dataCell = tableView.dequeueReusableCell(withIdentifier: dataCell.dataCelIdentifier,
+                                                       for: indexPath) as? dataCell else {
+                                                        return UITableViewCell()
+        }
+        let text = "kjsdbfajhsdbfkjasbdfksaljbdfa sdfkjbasdkfjbasdkjfbaslkdjbfasd fasdfbalksjdbfkasjbdf sdkjabsdkfjb askdjfblkjsadb "
+        let rowWidth = UIScreen.main.bounds.size.width - tableView.estimatedRowHeight
+        labelheight = dataCell.subTitle.height(fromtext: " \(text) ",
+            font: dataCell.subTitle.font, width: rowWidth)
+        dataCell.subTitle.text = text
+        return dataCell
     }
-    
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if labelheight < tableView.estimatedRowHeight {
+            return tableView.estimatedRowHeight
+        }else{
+            return labelheight
+        }
+    }
 }
 
