@@ -24,6 +24,10 @@ class DataViewModel {
                 }
                 if let title = apiData.title {
                     self.viewTitle = title
+                    guard let viewRows = apiData.rows else { return }
+                    /// Check for nil values inside the array
+                    let array = viewRows.filter({ $0.title != nil || $0.description != nil || $0.imageHref != nil })
+                    DataViewModel.dataVM.tableArray = array
                     callCompleted(true)
                 }
             }

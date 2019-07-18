@@ -17,7 +17,11 @@ extension UIImageView {
                                     completionHandler: { (data, _ response, _ error) -> Void in
                                         DispatchQueue.main.async {
                                             self.contentMode =  .scaleAspectFill
-                                            if let data = data { self.image = UIImage(data: data) }
+                                            if let data = data {
+                                                DispatchQueue.main.async {
+                                                    self.image = UIImage(data: data)
+                                                }
+                                            }
                                         }
         }).resume()
     }

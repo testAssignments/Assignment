@@ -20,8 +20,7 @@ class ServiceManager {
                 let decoder = JSONDecoder()
                 guard let dataVal = dataString.data(using: .utf8) else { return } // to avoid forced unwrapping
                 let viewData = try decoder.decode(ApiData.self, from: dataVal)
-                guard let viewRows = viewData.rows else { return } // to avoid forced unwrapping
-                DataViewModel.dataVM.tableArray = viewRows
+                guard viewData.rows != nil else { return } // to avoid forced unwrapping
                 completionHandler(viewData, nil)
             } catch let err {
                 completionHandler(nil, err)

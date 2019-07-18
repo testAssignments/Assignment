@@ -18,8 +18,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.lightGray
-        tableView.estimatedRowHeight = 50
-        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(DataCell.self, forCellReuseIdentifier: DataCell.dataCelIdentifier)
         return tableView
@@ -27,6 +26,9 @@ class ViewController: UIViewController {
     /// View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupview()
+        setupNavigationBar()
+        setLayouts()
         DataViewModel.dataVM.refreshTableData { (done) in
             if done {
                 DispatchQueue.main.sync {
@@ -34,10 +36,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-        setupview()
-        setupNavigationBar()
-        setLayouts()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
@@ -65,8 +63,9 @@ class ViewController: UIViewController {
     /// View refresh method
     @objc func refreshView() {
         print("refresh tableview..")
-//        DataViewModel.dataVM.refreshTableData()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     func height(fromtext: String, font: UIFont, width: CGFloat) -> CGFloat {
         let label = UILabel()
@@ -93,14 +92,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         dataCell.imgView.image = UIImage()
         dataCell.subTitle.text = ""
         let rowdata = DataViewModel.dataVM.tableArray[indexPath.row]
-        if let title = rowdata.title {
-            dataCell.title.text = title
-        }
-        if let description = rowdata.description {
-            dataCell.subTitle.text = description
-        }
-        if let imageurl = rowdata.imageHref {
-            dataCell.imgView.downloadImageFrom(link: imageurl)
+        /// check for nil values
+        if rowdata.title != nil || rowdata.description != nil || rowdata.imageHref != nil {
+            if let title = rowdata.title {
+                dataCell.title.text = title
+            }
+            if let description = rowdata.description {
+                dataCell.subTitle.text = description
+            }
+            if let imageurl = rowdata.imageHref {
+                dataCell.imgView.downloadImageFrom(link: imageurl)
+            }
         }
         return dataCell
     }
@@ -108,10 +110,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let description = DataViewModel.dataVM.tableArray[indexPath.row].description
         let heightofLabel = height(fromtext: " \(String(describing: description)) ",
-            font: UIFont.systemFont(ofSize: 13), width: tableView.frame.width)
-        if heightofLabel > tableView.estimatedRowHeight {
-            return heightofLabel + 100
-        } else { return tableView.estimatedRowHeight }
+            font: UIFont.systemFont(ofSize: 14), width: tableView.frame.width)
+        return heightofLabel + 70
     }
     /// Handling selctions
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

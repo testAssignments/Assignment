@@ -14,10 +14,10 @@ class NetworkTests: XCTestCase {
     var session: URLSession!
     override func setUp() {
         super.setUp()
-        Session = URLSession(configuration: .default)
+        session = URLSession(configuration: .default)
     }
     override func tearDown() {
-        Session = nil
+        session = nil
         super.tearDown()
     }
   /// Safe status code check
@@ -25,7 +25,7 @@ class NetworkTests: XCTestCase {
         let url =
             URL(string: DataViewModel().getURLFromPlist())
         let promise = expectation(description: "Status code: 200")
-        let dataTask = Session.dataTask(with: url!) { (_ data, response, error) in
+        let dataTask = session.dataTask(with: url!) { (_ data, response, error) in
             if let error = error {
                 XCTFail("Error: \(error.localizedDescription)")
                 return
@@ -47,7 +47,7 @@ class NetworkTests: XCTestCase {
         let promise = expectation(description: "Completion handler invoked")
         var statusCode: Int?
         var responseError: Error?
-        let dataTask = Session.dataTask(with: url!) { (_ data, response, error) in
+        let dataTask = session.dataTask(with: url!) { (_ data, response, error) in
             statusCode = (response as? HTTPURLResponse)?.statusCode
             responseError = error
             promise.fulfill()
