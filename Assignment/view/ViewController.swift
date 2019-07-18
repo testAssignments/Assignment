@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         tableView.backgroundColor = UIColor.lightGray
         tableView.estimatedRowHeight = 100
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.allowsSelection = false
         tableView.register(DataCell.self, forCellReuseIdentifier: DataCell.dataCelIdentifier)
         return tableView
         }()
@@ -63,8 +64,12 @@ class ViewController: UIViewController {
     /// View refresh method
     @objc func refreshView() {
         print("refresh tableview..")
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        DataViewModel.dataVM.refreshTableData { (done) in
+            if done {
+                DispatchQueue.main.sync {
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
     func height(fromtext: String, font: UIFont, width: CGFloat) -> CGFloat {
@@ -112,9 +117,5 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let heightofLabel = height(fromtext: " \(String(describing: description)) ",
             font: UIFont.systemFont(ofSize: 14), width: tableView.frame.width)
         return heightofLabel + 70
-    }
-    /// Handling selctions
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
     }
 }

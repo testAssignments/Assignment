@@ -10,25 +10,25 @@ import XCTest
 @testable import Assignment
 
 class AssignmentTests: XCTestCase {
-
+    var testViewController = ViewController()
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        testViewController.setupview()
+        testViewController.setLayouts()
+        testViewController.setupNavigationBar()
+        testViewController.refreshView()
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testDateSourceDelegate() {
+        XCTAssertTrue(testViewController.conforms(to: UITableViewDelegate.self))
+        XCTAssertTrue(testViewController.conforms(to: UITableViewDataSource.self))
+        XCTAssertTrue(testViewController.responds(to:
+            #selector(testViewController.tableView(_:numberOfRowsInSection:))))
+        XCTAssertTrue(testViewController.responds(to:
+            #selector(testViewController.tableView(_:cellForRowAt:))))
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testTableViewCellHasReuseIdentifier() {
+        let cell = testViewController.tableView.dequeueReusableCell(withIdentifier: "DataCellIdentifier")
+        let actualReuseIdentifer = cell?.reuseIdentifier
+        let expectedReuseIdentifier = "DataCellIdentifier"
+        XCTAssertEqual(actualReuseIdentifer, expectedReuseIdentifier)
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
