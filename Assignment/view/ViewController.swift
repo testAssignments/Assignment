@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         tableView.register(dataCell.self, forCellReuseIdentifier: dataCell.dataCelIdentifier)
         return tableView
         }()
-    
+    /// View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupview()
@@ -58,10 +58,10 @@ class ViewController: UIViewController {
     }
 }
 extension ViewController:UITableViewDelegate,UITableViewDataSource{
+    /// Datasource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let dataCell = tableView.dequeueReusableCell(withIdentifier: dataCell.dataCelIdentifier,
                                                        for: indexPath) as? dataCell else {
@@ -74,12 +74,17 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
         dataCell.subTitle.text = text
         return dataCell
     }
+    /// Delegate methods
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if labelheight < tableView.estimatedRowHeight {
             return tableView.estimatedRowHeight
         }else{
             return labelheight
         }
+    }
+    /// Handling selctions
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 
