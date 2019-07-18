@@ -8,9 +8,10 @@
 
 import XCTest
 import Foundation
+@testable import Assignment
 
 class NetworkTests: XCTestCase {
-    var Session: URLSession!
+    var session: URLSession!
     override func setUp() {
         super.setUp()
         Session = URLSession(configuration: .default)
@@ -22,7 +23,7 @@ class NetworkTests: XCTestCase {
   /// Safe status code check
     func testValidCallToFactsUrlGetsHTTPStatusCode200() {
         let url =
-            URL(string: "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json")
+            URL(string: DataViewModel().getURLFromPlist())
         let promise = expectation(description: "Status code: 200")
         let dataTask = Session.dataTask(with: url!) { (_ data, response, error) in
             if let error = error {
@@ -42,7 +43,7 @@ class NetworkTests: XCTestCase {
     /// Data Fullfilment test
     func testCallToFactsUrlCompletes() {
         let url =
-            URL(string: "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json")
+            URL(string: DataViewModel().getURLFromPlist())
         let promise = expectation(description: "Completion handler invoked")
         var statusCode: Int?
         var responseError: Error?

@@ -7,13 +7,13 @@
 //
 
 import Foundation
-struct data: Codable {
+struct DataDict: Codable {
     var title: String?
     var description: String?
     var imageHref: String?
 }
 
-struct TableData: Codable {
+struct ApiData: Codable {
     var title: String?
-    var rows: [data]?
+    var rows: [DataDict]?
 }

@@ -8,11 +8,11 @@
 
 import UIKit
 
-class dataCell: UITableViewCell {
+class DataCell: UITableViewCell {
     static let dataCelIdentifier = "DataCellIdentifier"
     /// subviews
     /// Image from the data
-    let ImageView: UIImageView = {
+    let imgView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill // image will never be strecthed vertially or horizontally
         image.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
@@ -39,7 +39,6 @@ class dataCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -47,7 +46,7 @@ class dataCell: UITableViewCell {
     /// init cell with subviews
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.contentView.addSubview(ImageView)
+        self.contentView.addSubview(imgView)
         self.contentView.addSubview(title)
         self.contentView.addSubview(subTitle)
         layoutConstraints()
@@ -55,27 +54,25 @@ class dataCell: UITableViewCell {
         self.contentView.clipsToBounds = true
     }
     /// Cell layout Constraints
-    func layoutConstraints(){
+    func layoutConstraints() {
         let marginGuide = contentView.layoutMarginsGuide
         subTitle.translatesAutoresizingMaskIntoConstraints = false
         title.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            ImageView.centerYAnchor.constraint(equalTo: marginGuide.centerYAnchor),
-            ImageView.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor, constant: 5),
-            ImageView.widthAnchor.constraint(equalToConstant: 60),
-            ImageView.heightAnchor.constraint(equalToConstant: 60),
-            title.leadingAnchor.constraint(equalTo: ImageView.trailingAnchor, constant: 5),
+            imgView.centerYAnchor.constraint(equalTo: marginGuide.centerYAnchor),
+            imgView.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor, constant: 5),
+            imgView.widthAnchor.constraint(equalToConstant: 60),
+            imgView.heightAnchor.constraint(equalToConstant: 60),
+            title.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 5),
             title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             title.topAnchor.constraint(equalTo: topAnchor, constant: 3),
             title.heightAnchor.constraint(equalToConstant: 30),
             subTitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 3),
-            subTitle.leadingAnchor.constraint(equalTo: ImageView.trailingAnchor, constant: 5),
+            subTitle.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 5),
             subTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
             ])
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
