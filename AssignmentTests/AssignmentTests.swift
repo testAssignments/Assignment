@@ -24,6 +24,8 @@ class AssignmentTests: XCTestCase {
             #selector(testViewController.tableView(_:numberOfRowsInSection:))))
         XCTAssertTrue(testViewController.responds(to:
             #selector(testViewController.tableView(_:cellForRowAt:))))
+        XCTAssertTrue(testViewController.responds(to:
+            #selector(testViewController.tableView(_:heightForRowAt:))))
     }
     func testTableViewCellHasReuseIdentifier() {
         let cell = testViewController.tableView.dequeueReusableCell(withIdentifier: "DataCellIdentifier")
