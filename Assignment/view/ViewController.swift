@@ -94,7 +94,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                                                         return UITableViewCell()
         }
         dataCell.title.text = ""
-        dataCell.imgView.image = UIImage()
         dataCell.subTitle.text = ""
         let rowdata = DataViewModel.dataVM.tableArray[indexPath.row]
         /// check for nil values
@@ -107,6 +106,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             }
             if let imageurl = rowdata.imageHref {
                 dataCell.imgView.downloadImageFrom(link: imageurl)
+            } else {
+                dataCell.imgView.image = #imageLiteral(resourceName: "Imageplaceholder")
             }
         }
         return dataCell
