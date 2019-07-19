@@ -34,6 +34,7 @@ class ViewController: UIViewController {
             if done {
                 DispatchQueue.main.sync {
                     self.tableView.reloadData()
+                    self.navigationItem.title = DataViewModel.dataVM.viewTitle
                 }
             }
         }
@@ -50,7 +51,6 @@ class ViewController: UIViewController {
     func setupNavigationBar() {
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshView))
         navigationItem.rightBarButtonItem = refreshButton
-        self.navigationItem.title = "testTitle"
     }
     /// Setting up constraints here
     func setLayouts() {
