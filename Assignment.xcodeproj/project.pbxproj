@@ -11,9 +11,7 @@
 		52EF6B3B22E02D480085240D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EF6B3A22E02D480085240D /* Manager.swift */; };
 		52FA118922DF197000022913 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA118822DF197000022913 /* AppDelegate.swift */; };
 		52FA118B22DF197000022913 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA118A22DF197000022913 /* ViewController.swift */; };
-		52FA118E22DF197000022913 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52FA118C22DF197000022913 /* Main.storyboard */; };
 		52FA119022DF197000022913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52FA118F22DF197000022913 /* Assets.xcassets */; };
-		52FA119322DF197000022913 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52FA119122DF197000022913 /* LaunchScreen.storyboard */; };
 		52FA119E22DF197000022913 /* AssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA119D22DF197000022913 /* AssignmentTests.swift */; };
 		52FA11AE22DF25F400022913 /* dataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA11AD22DF25F400022913 /* dataModel.swift */; };
 		52FA11B022DF292C00022913 /* dataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA11AF22DF292C00022913 /* dataCell.swift */; };
@@ -37,9 +35,7 @@
 		52FA118522DF197000022913 /* Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52FA118822DF197000022913 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52FA118A22DF197000022913 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		52FA118D22DF197000022913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52FA118F22DF197000022913 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		52FA119222DF197000022913 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52FA119422DF197000022913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52FA119922DF197000022913 /* AssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssignmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52FA119D22DF197000022913 /* AssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTests.swift; sourceTree = "<group>"; };
@@ -79,8 +75,6 @@
 		52FA117C22DF197000022913 = {
 			isa = PBXGroup;
 			children = (
-				52FA119122DF197000022913 /* LaunchScreen.storyboard */,
-				52FA118C22DF197000022913 /* Main.storyboard */,
 				52FA118722DF197000022913 /* Assignment */,
 				52FA119C22DF197000022913 /* AssignmentTests */,
 				52FA118622DF197000022913 /* Products */,
@@ -236,9 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52FA119322DF197000022913 /* LaunchScreen.storyboard in Resources */,
 				52FA119022DF197000022913 /* Assets.xcassets in Resources */,
-				52FA118E22DF197000022913 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,25 +296,6 @@
 			targetProxy = 52FA119A22DF197000022913 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		52FA118C22DF197000022913 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52FA118D22DF197000022913 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		52FA119122DF197000022913 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52FA119222DF197000022913 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		52FA11A022DF197000022913 /* Debug */ = {
