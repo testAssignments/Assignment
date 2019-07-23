@@ -16,7 +16,7 @@ extension UIImageView {
         URLSession.shared.dataTask( with: NSURL(string: link)! as URL,
                                     completionHandler: { (data, _ response, _ error) -> Void in
                                         DispatchQueue.main.async {
-                                            self.contentMode =  .scaleAspectFill
+                                            self.contentMode =  .scaleToFill
                                             if let data = data {
                                                 DispatchQueue.main.async {
                                                     self.image = UIImage(data: data)
