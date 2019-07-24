@@ -18,12 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         /// collection view is for the second assignment comment the needed thing
-//        let layout = DynamicCollectionLayout()
-//        window?.rootViewController = UINavigationController(rootViewController:
-//            CollectionViewController(collectionViewLayout: layout))
-        /// tableview for the first assignment comment the needed thing
+        let layout = DynamicCollectionLayout()
         window?.rootViewController = UINavigationController(rootViewController:
-            ViewController())
+            CollectionViewController(collectionViewLayout: layout))
+        /// tableview for the first assignment comment the needed thing
+//        window?.rootViewController = UINavigationController(rootViewController:
+//            ViewController())
         return true
     }
 
