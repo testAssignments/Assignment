@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DataCollectionCell: UICollectionViewCell {
     static let dataCelIdentifier = "DataCollectionCell"
     static let cellCornerRadius: CGFloat = 5.0
+    let spacingValue: CGFloat = 15
     /// Container view for beautification
     let containerView: UIView = {
        let view = UIView()
@@ -23,7 +25,7 @@ class DataCollectionCell: UICollectionViewCell {
     /// Image from the data
     let imgView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleToFill // image will never be strecthed vertially or horizontally
+        image.contentMode = .scaleAspectFit // image will never be strecthed vertially or horizontally
         image.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         return image
     }()
@@ -31,9 +33,10 @@ class DataCollectionCell: UICollectionViewCell {
     let title: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor =  UIColor.white
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = NSTextAlignment.center
         return label
     }()
     /// Description Label
@@ -45,35 +48,67 @@ class DataCollectionCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    lazy var width: NSLayoutConstraint = {
+        let width = contentView.widthAnchor.constraint(equalToConstant: bounds.size.width)
+        width.isActive = true
+        return width
+    }()
     override init(frame: CGRect) {
-        super.init(frame: .zero)
-        containerView.addSubview(imgView)
-        containerView.addSubview(title)
-        containerView.addSubview(subTitle)
-        contentView.addSubview(containerView)
+        super.init(frame: frame)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
         contentView.layer.cornerRadius = DataCollectionCell.cellCornerRadius
         contentView.clipsToBounds = true
         contentView.backgroundColor = UIColor.black
+        layoutCellConstraints()
+    }
+    override func systemLayoutSizeFitting(_ targetSize: CGSize,
+                                          withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
+                                          verticalFittingPriority: UILayoutPriority) -> CGSize {
+        width.constant = bounds.size.width
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return contentView.systemLayoutSizeFitting(CGSize(width: Constant.ipadWidth, height: Constant.estimatedHeight))
+        } else {
+            return contentView.systemLayoutSizeFitting(CGSize(width: Constant.iphoneWidth, height: Constant.estimatedHeight))
+        }
     }
     /// Layout for the cell things
     func layoutCellConstraints() {
+        contentView.addSubview(containerView)
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 3),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 3),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            imgView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            imgView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            imgView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            title.topAnchor.constraint(equalTo: imgView.bottomAnchor),
-            title.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            title.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            title.heightAnchor.constraint(equalToConstant: 30),
-            subTitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 3),
-            subTitle.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            subTitle.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            subTitle.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             ])
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(title)
+        NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: spacingValue),
+            title.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: spacingValue),
+            title.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -spacingValue),
+            ])
+        title.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(subTitle)
+        NSLayoutConstraint.activate([
+            subTitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: spacingValue),
+            subTitle.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: spacingValue),
+            subTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -spacingValue),
+            ])
+        subTitle.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(imgView)
+        NSLayoutConstraint.activate([
+            imgView.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: spacingValue),
+            imgView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            imgView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            imgView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            imgView.heightAnchor.constraint(equalToConstant: Constant.estimatedHeight),
+            imgView.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+            ])
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        if let lastSubview = contentView.subviews.last {
+            contentView.bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: spacingValue).isActive = true
+        }
     }
     /// Setting up the collectionview cell
     func setUpCell(with cellData: DataDict) {
@@ -88,7 +123,8 @@ class DataCollectionCell: UICollectionViewCell {
                 subTitle.text = subTitleText
             }
             if let imghref = cellData.imageHref {
-                imgView.downloadImageFrom(link: imghref)
+                let url = URL(string: imghref)
+                imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "Imageplaceholder"))
             } else {
                 imgView.image = #imageLiteral(resourceName: "Imageplaceholder")
             }

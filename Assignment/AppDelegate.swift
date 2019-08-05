@@ -17,10 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        /// collection view is for the second assignment comment the needed thing
-        let layout = DynamicCollectionLayout()
         window?.rootViewController = UINavigationController(rootViewController:
-            CollectionViewController(collectionViewLayout: layout))
+            CollectionViewController())
         /// tableview for the first assignment comment the needed thing
 //        window?.rootViewController = UINavigationController(rootViewController:
 //            ViewController())

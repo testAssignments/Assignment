@@ -8,6 +8,7 @@ target 'Assignment' do
   # Pods for Assignment
 	pod 'Alamofire'
   pod 'SDWebImage'
+  pod 'SwiftLint'
 
   target 'AssignmentTests' do
     inherit! :search_paths

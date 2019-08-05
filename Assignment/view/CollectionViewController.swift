@@ -8,23 +8,63 @@
 
 import UIKit
 
-class CollectionViewController: UICollectionViewController {
+class CollectionViewController: UIViewController {
+    var collectionView: UICollectionView!
+    var spacingValue: CGFloat = 5
+    var layout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            layout.estimatedItemSize = CGSize(width: Constant.ipadWidth, height: Constant.estimatedHeight)
+        } else {
+            layout.estimatedItemSize = CGSize(width: Constant.iphoneWidth, height: Constant.estimatedHeight)
+        }
+        
+        return layout
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
+        collectionView.layer.masksToBounds = true
+        collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView?.contentInset = UIEdgeInsets(top: 23, left: 10, bottom: 10, right: 10)
         collectionView.isScrollEnabled = true
         collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.register(DataCollectionCell.self,
                                 forCellWithReuseIdentifier: DataCollectionCell.dataCelIdentifier)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(collectionView)
+        collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: spacingValue).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: spacingValue).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: -spacingValue).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -spacingValue).isActive = true
         DataViewModel.dataVM.refreshTableData { (done) in
             if done {
                 DispatchQueue.main.sync {
-                    // Set the DynamicCollectionLayout delegate
-                    if let layout = self.collectionView?.collectionViewLayout as? DynamicCollectionLayout {
-                        layout.delegate = self
-                    }
                     self.collectionView.reloadData()
                 }
+            }
+        }
+    }
+    // Setting up Navigation bar
+    func setUpNavigationBar() {
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshCollectionView))
+        navigationItem.rightBarButtonItem = refreshButton
+    }
+    @objc func refreshCollectionView() {
+        DataViewModel.dataVM.refreshTableData { (done) in
+            if done {
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.navigationItem.title = DataViewModel.dataVM.viewTitle
+                    self.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0),
+                                                      at: .top,
+                                                      animated: true)
+                }
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Error while fetching data", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in }))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -39,18 +79,18 @@ class CollectionViewController: UICollectionViewController {
         return label.frame.height
     }
 }
-extension CollectionViewController {
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension CollectionViewController:UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if DataViewModel.dataVM.tableArray.count > 0 {
             return DataViewModel.dataVM.tableArray.count
         } else {
             return 0
         }
     }
-    override func collectionView(_ collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DataCollectionCell.dataCelIdentifier,
                                                            for: indexPath) as? DataCollectionCell else {
@@ -59,13 +99,28 @@ extension CollectionViewController {
         cell.setUpCell(with: DataViewModel.dataVM.tableArray[indexPath.row])
         return cell
     }
-}
-extension CollectionViewController: DynamicLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView,
-                        heightForSubtitleAtIndexPath indexPath: IndexPath) -> CGFloat {
-        let description = DataViewModel.dataVM.tableArray[indexPath.row].description
-        let heightofLabel = height(fromtext: " \(String(describing: description)) ",
-            font: UIFont.systemFont(ofSize: 14), width: collectionView.frame.size.width/2)
-        return heightofLabel
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            layout.estimatedItemSize = CGSize(width: Constant.ipadWidth, height: Constant.estimatedHeight)
+        } else {
+            layout.estimatedItemSize = CGSize(width: Constant.iphoneWidth, height: Constant.estimatedHeight)
+        }
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            layout.estimatedItemSize = CGSize(width: Constant.ipadWidth, height: Constant.estimatedHeight)
+        } else {
+            layout.estimatedItemSize = CGSize(width: Constant.iphoneWidth, height: Constant.estimatedHeight)
+        }
+        
+        layout.invalidateLayout()
     }
 }
