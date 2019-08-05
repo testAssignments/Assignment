@@ -19,9 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(rootViewController:
             CollectionViewController())
-        /// tableview for the first assignment comment the needed thing
-//        window?.rootViewController = UINavigationController(rootViewController:
-//            ViewController())
         return true
     }
 
