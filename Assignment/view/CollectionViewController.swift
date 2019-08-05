@@ -23,28 +23,31 @@ class CollectionViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
+        setUpNavigationBar()
+        DataViewModel.dataVM.refreshTableData { (done) in
+            if done {
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
+    func setupCollectionView(){
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.layer.masksToBounds = true
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView?.contentInset = UIEdgeInsets(top: 23, left: 10, bottom: 10, right: 10)
         collectionView.isScrollEnabled = true
         collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.register(DataCollectionCell.self,
                                 forCellWithReuseIdentifier: DataCollectionCell.dataCelIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(collectionView)
-        collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: spacingValue).isActive = true
+        collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: spacingValue).isActive = true
         collectionView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: -spacingValue).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -spacingValue).isActive = true
-        DataViewModel.dataVM.refreshTableData { (done) in
-            if done {
-                DispatchQueue.main.sync {
-                    self.collectionView.reloadData()
-                }
-            }
-        }
+        collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     // Setting up Navigation bar
     func setUpNavigationBar() {
