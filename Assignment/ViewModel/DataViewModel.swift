@@ -17,7 +17,7 @@ class DataViewModel {
     var viewTitle: String?
     /// Api call to refesh the table
     func refreshTableData(callCompleted: @escaping (Bool) -> Void) {
-        ServiceManager.callDataAPI { (data, error) in
+        ServiceManager.callAlamofireDataAPI { (data, error) in
             if error == nil {
                 guard let apiData = data else {
                     return

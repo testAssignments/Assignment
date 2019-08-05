@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class ServiceManager {
     static func callDataAPI(completionHandler: @escaping (ApiData?, _ error: Error?) -> Void) {
@@ -26,5 +27,23 @@ class ServiceManager {
                 completionHandler(nil, err)
             }
         }.resume()
+    }
+    static func callAlamofireDataAPI(completionHandler: @escaping (ApiData?, _ error: Error?) -> Void) {
+        Alamofire.request(Constant.url) .validate().responseString { (response) in
+            if response.result.isSuccess {
+                guard let data = response.value?.data(using: .utf8) else { return }
+                do {
+                    // JSON data parsing using Codable protocol
+                    
+                    let decoder = JSONDecoder()
+                    let viewData = try decoder.decode(ApiData.self, from: data)
+                    completionHandler(viewData, nil)
+                } catch let err {
+                    completionHandler(nil, err)
+                }
+            } else {
+                completionHandler(nil, response.error)
+            }
+        }
     }
 }
