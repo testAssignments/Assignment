@@ -81,31 +81,27 @@ class DataCollectionCell: UICollectionViewCell {
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             ])
-        containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(title)
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: spacingValue),
             title.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: spacingValue),
             title.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -spacingValue),
             ])
-        title.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(subTitle)
         NSLayoutConstraint.activate([
             subTitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: spacingValue),
             subTitle.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: spacingValue),
             subTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -spacingValue),
             ])
-        subTitle.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imgView)
         NSLayoutConstraint.activate([
-            imgView.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: spacingValue),
+            imgView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: spacingValue),
             imgView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             imgView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             imgView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imgView.heightAnchor.constraint(equalToConstant: Constant.estimatedHeight),
             imgView.widthAnchor.constraint(equalTo: contentView.widthAnchor)
             ])
-        imgView.translatesAutoresizingMaskIntoConstraints = false
         contentView.bottomAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: spacingValue).isActive = true
     }
     /// Setting up the collectionview cell
@@ -122,6 +118,7 @@ class DataCollectionCell: UICollectionViewCell {
             }
             if let imghref = cellData.imageHref {
                 let url = URL(string: imghref)
+                /// Use of Sd_WebImage framework for image downloading
                 imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "Imageplaceholder"))
             } else {
                 imgView.image = #imageLiteral(resourceName: "Imageplaceholder")

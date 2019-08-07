@@ -71,16 +71,6 @@ class CollectionViewController: UIViewController {
             }
         }
     }
-    func height(fromtext: String, font: UIFont, width: CGFloat) -> CGFloat {
-        let label = UILabel()
-        label.frame.size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = font
-        label.text = fromtext
-        label.sizeToFit()
-        return label.frame.height
-    }
 }
 extension CollectionViewController:UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -101,29 +91,5 @@ extension CollectionViewController:UICollectionViewDelegate, UICollectionViewDat
         }
         cell.setUpCell(with: DataViewModel.dataVM.tableArray[indexPath.row])
         return cell
-    }
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            layout.estimatedItemSize = CGSize(width: Constant.ipadWidth, height: Constant.estimatedHeight)
-        } else {
-            layout.estimatedItemSize = CGSize(width: Constant.iphoneWidth, height: Constant.estimatedHeight)
-        }
-        
-        super.traitCollectionDidChange(previousTraitCollection)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            layout.estimatedItemSize = CGSize(width: Constant.ipadWidth, height: Constant.estimatedHeight)
-        } else {
-            layout.estimatedItemSize = CGSize(width: Constant.iphoneWidth, height: Constant.estimatedHeight)
-        }
-        
-        layout.invalidateLayout()
     }
 }

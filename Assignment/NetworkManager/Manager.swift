@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 
 class ServiceManager {
+    /// Use of DataTask apple framework for API calls
     static func callDataAPI(completionHandler: @escaping (ApiData?, _ error: Error?) -> Void) {
         guard let url = URL(string: DataViewModel().getURLFromPlist())
             else { return }
@@ -28,6 +29,7 @@ class ServiceManager {
             }
         }.resume()
     }
+    /// Use of Alamofire for API calls
     static func callAlamofireDataAPI(completionHandler: @escaping (ApiData?, _ error: Error?) -> Void) {
         Alamofire.request(Constant.url) .validate().responseString { (response) in
             if response.result.isSuccess {
