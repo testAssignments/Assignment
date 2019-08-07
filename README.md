@@ -16,4 +16,4 @@
 	 - UI related tests
  - #### ServiceCallTest:
 	 - API call test cases
-- ## Cocoapods Used : Alamofire , SD_WebImageview, SwiftLint
+- #### Cocoapods Used : Alamofire , SD_WebImageView & SwiftLint
