@@ -77,8 +77,8 @@ class DataCollectionCell: UICollectionViewCell {
         contentView.addSubview(containerView)
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 3),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 3),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             ])
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,9 +106,7 @@ class DataCollectionCell: UICollectionViewCell {
             imgView.widthAnchor.constraint(equalTo: contentView.widthAnchor)
             ])
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        if let lastSubview = contentView.subviews.last {
-            contentView.bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: spacingValue).isActive = true
-        }
+        contentView.bottomAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: spacingValue).isActive = true
     }
     /// Setting up the collectionview cell
     func setUpCell(with cellData: DataDict) {
