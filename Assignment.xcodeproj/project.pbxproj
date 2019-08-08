@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		2062A71EF2DDBCC5B0B834C4 /* Pods_Assignment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19A461B0DA3E09BF95C2792 /* Pods_Assignment.framework */; };
 		5201663022F805D800A6DCC3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5201662F22F805D800A6DCC3 /* Constants.swift */; };
+		5225540D22FC23B40099962A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225540C22FC23B40099962A /* Manager.swift */; };
 		52ACBBCC22E02923007F4882 /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ACBBCB22E02923007F4882 /* DataViewModel.swift */; };
-		52D770DD22E6D71900694991 /* DynamicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D770DC22E6D71900694991 /* DynamicLayout.swift */; };
 		52D770DF22E6DB6100694991 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D770DE22E6DB6100694991 /* CollectionViewController.swift */; };
 		52D770E422E6E05C00694991 /* DataCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D770E322E6E05C00694991 /* DataCollectionCell.swift */; };
 		52EF6B3B22E02D480085240D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EF6B3A22E02D480085240D /* Manager.swift */; };
@@ -18,7 +18,6 @@
 		52FA119022DF197000022913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52FA118F22DF197000022913 /* Assets.xcassets */; };
 		52FA119E22DF197000022913 /* AssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA119D22DF197000022913 /* AssignmentTests.swift */; };
 		52FA11AE22DF25F400022913 /* dataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA11AD22DF25F400022913 /* dataModel.swift */; };
-		52FA11B522DF427600022913 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA11B422DF427600022913 /* UIImageView.swift */; };
 		52FA11B722DF462F00022913 /* serviceCallTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FA11B622DF462F00022913 /* serviceCallTest.swift */; };
 		CFDBC052CDFC887A5B79F437 /* Pods_AssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F133F1A88FA916073996F027 /* Pods_AssignmentTests.framework */; };
 /* End PBXBuildFile section */
@@ -37,8 +36,8 @@
 		0E645C1B30F03C1C91334820 /* Pods-Assignment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment.release.xcconfig"; path = "Target Support Files/Pods-Assignment/Pods-Assignment.release.xcconfig"; sourceTree = "<group>"; };
 		3B3BAED30A66AB10B9F8F1A9 /* Pods-AssignmentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssignmentTests.debug.xcconfig"; path = "Target Support Files/Pods-AssignmentTests/Pods-AssignmentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5201662F22F805D800A6DCC3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5225540C22FC23B40099962A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		52ACBBCB22E02923007F4882 /* DataViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewModel.swift; sourceTree = "<group>"; };
-		52D770DC22E6D71900694991 /* DynamicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLayout.swift; sourceTree = "<group>"; };
 		52D770DE22E6DB6100694991 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		52D770E322E6E05C00694991 /* DataCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCollectionCell.swift; sourceTree = "<group>"; };
 		52EF6B3A22E02D480085240D /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
@@ -50,7 +49,6 @@
 		52FA119D22DF197000022913 /* AssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTests.swift; sourceTree = "<group>"; };
 		52FA119F22DF197000022913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52FA11AD22DF25F400022913 /* dataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataModel.swift; sourceTree = "<group>"; };
-		52FA11B422DF427600022913 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		52FA11B622DF462F00022913 /* serviceCallTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = serviceCallTest.swift; sourceTree = "<group>"; };
 		A19A461B0DA3E09BF95C2792 /* Pods_Assignment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assignment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A7ED5139F4B86067777C8A /* Pods-Assignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment.debug.xcconfig"; path = "Target Support Files/Pods-Assignment/Pods-Assignment.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,12 +93,12 @@
 			path = SupportFiles;
 			sourceTree = "<group>";
 		};
-		52D770DB22E6D6F400694991 /* CollectionLayout */ = {
+		5225540B22FC23B40099962A /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				52D770DC22E6D71900694991 /* DynamicLayout.swift */,
+				5225540C22FC23B40099962A /* Manager.swift */,
 			);
-			path = CollectionLayout;
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		52D770E022E6DF9000694991 /* CustomCells */ = {
@@ -147,10 +145,8 @@
 				52D770E022E6DF9000694991 /* CustomCells */,
 				52FA11A922DF25AB00022913 /* Model */,
 				52FA11B822DF46F900022913 /* ViewModel */,
-				52FA11B122DF41CA00022913 /* Extensions */,
-				52EF6B3922E02CEF0085240D /* NetworkManager */,
-				52D770DB22E6D6F400694991 /* CollectionLayout */,
 				5201662E22F805B300A6DCC3 /* SupportFiles */,
+				5225540B22FC23B40099962A /* NetworkManager */,
 				52FA118F22DF197000022913 /* Assets.xcassets */,
 				52FA119422DF197000022913 /* Info.plist */,
 			);
@@ -181,14 +177,6 @@
 				52FA11AD22DF25F400022913 /* dataModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		52FA11B122DF41CA00022913 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				52FA11B422DF427600022913 /* UIImageView.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		52FA11B822DF46F900022913 /* ViewModel */ = {
@@ -397,11 +385,9 @@
 			files = (
 				52D770DF22E6DB6100694991 /* CollectionViewController.swift in Sources */,
 				5201663022F805D800A6DCC3 /* Constants.swift in Sources */,
-				52D770DD22E6D71900694991 /* DynamicLayout.swift in Sources */,
 				52FA118922DF197000022913 /* AppDelegate.swift in Sources */,
-				52EF6B3B22E02D480085240D /* Manager.swift in Sources */,
-				52FA11B522DF427600022913 /* UIImageView.swift in Sources */,
 				52FA11AE22DF25F400022913 /* dataModel.swift in Sources */,
+				5225540D22FC23B40099962A /* Manager.swift in Sources */,
 				52D770E422E6E05C00694991 /* DataCollectionCell.swift in Sources */,
 				52ACBBCC22E02923007F4882 /* DataViewModel.swift in Sources */,
 			);

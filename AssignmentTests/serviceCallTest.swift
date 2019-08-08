@@ -8,6 +8,7 @@
 
 import XCTest
 import Foundation
+import Alamofire
 @testable import Assignment
 
 class NetworkTests: XCTestCase {
@@ -56,5 +57,30 @@ class NetworkTests: XCTestCase {
         wait(for: [promise], timeout: 5)
         XCTAssertNil(responseError)
         XCTAssertEqual(statusCode, 200)
+    }
+    func testAPIJSONResponse() {
+        let exp = expectation(description: "API JSON Response")
+        Alamofire.request(Constant.url) .validate().responseString { (response) in
+            if response.result.isSuccess {
+                guard let data = response.value?.data(using: .utf8) else { return }
+                do {
+                    //JSON data parsing using Codable protocol
+                    let decoder = JSONDecoder()
+                    let viewData = try decoder.decode(ApiData.self, from: data)
+                    
+                    if let count = viewData.rows?.count, count > 0 {
+                        exp.fulfill()
+                    } else {
+                        
+                        XCTFail("API DOES NOT CONTAIN ANY DATA TO DISPLAY ON COLLECTIONVIEW")
+                    }
+                } catch let err {
+                    XCTFail(err.localizedDescription)
+                }
+            } else {
+                XCTFail(response.error?.localizedDescription ?? "ERROR")
+            }
+        }
+        waitForExpectations(timeout: 5.0, handler: nil)
     }
 }

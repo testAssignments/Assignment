@@ -10,27 +10,26 @@ import XCTest
 @testable import Assignment
 
 class AssignmentTests: XCTestCase {
-    var testViewController = ViewController()
+    var testViewController = CollectionViewController()
     override func setUp() {
-        testViewController.setupview()
-        testViewController.setLayouts()
-        testViewController.setupNavigationBar()
-        testViewController.refreshView()
+        testViewController.setupCollectionView()
+        testViewController.setUpNavigationBar()
+        testViewController.refreshCollectionView()
     }
     func testDateSourceDelegate() {
-        XCTAssertTrue(testViewController.conforms(to: UITableViewDelegate.self))
-        XCTAssertTrue(testViewController.conforms(to: UITableViewDataSource.self))
+        XCTAssertTrue(testViewController.conforms(to: UICollectionViewDelegate.self))
+        XCTAssertTrue(testViewController.conforms(to: UICollectionViewDataSource.self))
         XCTAssertTrue(testViewController.responds(to:
-            #selector(testViewController.tableView(_:numberOfRowsInSection:))))
+            #selector(testViewController.collectionView(_:cellForItemAt:))))
         XCTAssertTrue(testViewController.responds(to:
-            #selector(testViewController.tableView(_:cellForRowAt:))))
+            #selector(testViewController.numberOfSections(in:))))
         XCTAssertTrue(testViewController.responds(to:
-            #selector(testViewController.tableView(_:heightForRowAt:))))
+            #selector(testViewController.collectionView(_:numberOfItemsInSection:))))
     }
     func testTableViewCellHasReuseIdentifier() {
-        let cell = testViewController.tableView.dequeueReusableCell(withIdentifier: "DataCellIdentifier")
-        let actualReuseIdentifer = cell?.reuseIdentifier
-        let expectedReuseIdentifier = "DataCellIdentifier"
+        let cell = testViewController.collectionView.dequeueReusableCell(withReuseIdentifier: "DataCollectionCell", for: IndexPath())
+        let actualReuseIdentifer = cell.reuseIdentifier
+        let expectedReuseIdentifier = "DataCollectionCell"
         XCTAssertEqual(actualReuseIdentifer, expectedReuseIdentifier)
     }
 }
