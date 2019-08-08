@@ -58,6 +58,7 @@ class NetworkTests: XCTestCase {
         XCTAssertNil(responseError)
         XCTAssertEqual(statusCode, 200)
     }
+    /// Test code for check datamodel is working properly
     func testAPIJSONResponse() {
         let exp = expectation(description: "API JSON Response")
         Alamofire.request(Constant.url) .validate().responseString { (response) in
