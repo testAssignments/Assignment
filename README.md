@@ -2,6 +2,7 @@
 - ## Architechture : MVVVM
 - ## Language Used :  Swift 4.0
 - ## SwiftLint : Coding standards
+- ## Cocoapods Used : Alamofire , SD_WebImageView & SwiftLint
  - #### dataViewModel: 
     - Acts as a heavy lifter for the service call and data handeling.
     - Shares object data with the view controller in shared instance pattern.
@@ -16,3 +17,4 @@
 	 - UI related tests
  - #### ServiceCallTest:
 	 - API call test cases
+
