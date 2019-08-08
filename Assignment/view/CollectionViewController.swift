@@ -11,6 +11,7 @@ import UIKit
 class CollectionViewController: UIViewController {
     var collectionView: UICollectionView!
     var spacingValue: CGFloat = 5
+    /// layout veriable
     var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -21,6 +22,7 @@ class CollectionViewController: UIViewController {
         
         return layout
     }()
+    /// View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
@@ -33,6 +35,7 @@ class CollectionViewController: UIViewController {
             }
         }
     }
+    /// Setting up the collectionview
     func setupCollectionView(){
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.layer.masksToBounds = true
@@ -54,6 +57,7 @@ class CollectionViewController: UIViewController {
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshCollectionView))
         navigationItem.rightBarButtonItem = refreshButton
     }
+    /// Refresh button Action
     @objc func refreshCollectionView() {
         DataViewModel.dataVM.refreshTableData { (done) in
             if done {

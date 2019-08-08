@@ -53,6 +53,7 @@ class DataCollectionCell: UICollectionViewCell {
         width.isActive = true
         return width
     }()
+    /// Init for cell
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +63,7 @@ class DataCollectionCell: UICollectionViewCell {
         contentView.backgroundColor = UIColor.black
         layoutCellConstraints()
     }
+    /// Collection layout
     override func systemLayoutSizeFitting(_ targetSize: CGSize,
                                           withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
                                           verticalFittingPriority: UILayoutPriority) -> CGSize {
@@ -72,7 +74,7 @@ class DataCollectionCell: UICollectionViewCell {
             return contentView.systemLayoutSizeFitting(CGSize(width: Constant.iphoneWidth, height: Constant.estimatedHeight))
         }
     }
-    /// Layout for the cell things
+    /// Layout for the cell objects
     func layoutCellConstraints() {
         contentView.addSubview(containerView)
         NSLayoutConstraint.activate([
