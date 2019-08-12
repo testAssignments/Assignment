@@ -97,14 +97,14 @@ class DataCollectionCell: UICollectionViewCell {
             ])
         contentView.addSubview(imgView)
         NSLayoutConstraint.activate([
-            imgView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: spacingValue),
+            imgView.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: spacingValue),
             imgView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             imgView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             imgView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imgView.heightAnchor.constraint(equalToConstant: Constant.estimatedHeight),
             imgView.widthAnchor.constraint(equalTo: contentView.widthAnchor)
             ])
-        contentView.bottomAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: spacingValue).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: imgView.bottomAnchor, constant: spacingValue).isActive = true
     }
     /// Setting up the collectionview cell
     func setUpCell(with cellData: DataDict) {
